@@ -7,11 +7,11 @@
 
 function finddoubletop (pnfdata,boxSize,rev)
         counter=0#счетчик фигур
-        counter2=0
+        counter2=0#счетчик ложных пробоев
         maxpro=0#все движение в сторону пробоя
         #проходим последовательно и ищем локальные максимумы
         #точка отсчета
-        previousmax=maximum(pnfdata)
+        previousmax=maximum(pnfdata)#? это первый вопрос, это же глобальные экстремумы
         previousmin=minimum(pnfdata)
 
         for i=2:length(pnfdata)-1
@@ -48,10 +48,11 @@ function finddoubletop (pnfdata,boxSize,rev)
                 counter+=1
                 maxpro+=previousmin-pnfdata[i]-boxSize
         end
-        #return (counter, maxpro-counter*boxSize*3)
+        return (counter, maxpro-counter*boxSize*rev,counter*boxSize*rev)
         #return (counter,maxpro/counter, (counter-counter2*rev)*boxSize)
         #return(counter,(4*counter-counter2*rev)*boxSize,3*counter)
-        return(counter,boxSize*(counter-counter2)-counter2*rev*boxSize,3*counter)
+        #сколько раз был сигнал, , комиссия
+        #return(counter,boxSize*(counter-counter2)-counter2*rev*boxSize,3*counter)
         #return(counter,counter2)
 end
 
